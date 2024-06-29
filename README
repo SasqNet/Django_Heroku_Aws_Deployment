@@ -1,0 +1,46 @@
+# Django App Deployment on Heroku
+
+This guide will help you deploy your Django application on Heroku.
+
+## Prerequisites
+
+- Git
+- Heroku CLI
+- Python 3.6 or newer
+- A Heroku account
+
+## Steps
+
+1. **Setup your local project**: Ensure your Django project is version controlled with Git.
+
+2. **Install Heroku CLI**: Download and install the Heroku CLI from [Heroku's website](https://devcenter.heroku.com/articles/heroku-cli).
+
+3. **Login to Heroku**: Open your terminal and run `heroku login` to login to your Heroku account.
+
+4. **Create a new Heroku app**: Run `heroku create <app-name>` to create a new app on Heroku.
+
+5. **Set up the database**: Heroku uses PostgreSQL. Update your `DATABASES` setting in `settings.py` to use `dj_database_url`.
+
+6. **Procfile**: Create a `Procfile` in your project root directory. This file is used by Heroku to determine how to run your app.
+
+    ```
+    web: gunicorn <projectname>.wsgi --log-file -
+    ```
+
+7. **Requirements**: Heroku recognizes Python applications by the existence of a `requirements.txt` file in the root of the repository. Make sure you have this file and it lists all necessary packages.
+
+8. **Settings**: Update `base.py & prod.py` to use environment variables for secret keys, database urls, debug status, etc.
+
+9. **Static files**: Set `STATIC_ROOT` to `staticfiles` and add `django_heroku.settings(locals())` at the end of `settings.py`.
+
+10. **Push to Heroku**: Commit your changes and push to Heroku using `git push heroku master`.
+
+11. **Migrate the database**: Run `heroku run python manage.py migrate` to apply migrations on Heroku.
+
+12. **Create a superuser**: If you need to create an admin user, you can do so with `heroku run python manage.py createsuperuser`.
+
+13. **Open the app**: You can now open your app with `heroku open`.
+
+## Troubleshooting
+
+If you encounter any issues, use `heroku logs --tail` to view the application logs for debugging.
