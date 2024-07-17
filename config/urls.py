@@ -5,6 +5,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('accounts/', include('allauth.urls')),
+    path('auth/', include('dj_rest_auth.urls')),  # dj-rest-auth endpoints
+    path('auth/registration/', include('dj_rest_auth.registration.urls')),  # registration endpoints
 ]
 
 if settings.DEBUG:

@@ -4,6 +4,7 @@ botocore==1.34.136
 dj-database-url==2.2.0
 djando==0.2
 Django==5.0.6
+django-allauth==0.63.6
 django-extensions==3.2.3
 django-heroku==0.3.1
 django-on-heroku==1.1.2
